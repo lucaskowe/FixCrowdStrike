@@ -2,6 +2,10 @@
 #Author: Lucas Kowe
 #Remove problematic driver file (update(?))) thoroughly
 try {
+    if (-not (Test-Path "C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys")) {
+        Write-Host "Crowdstrike Fix Not Required. File Does Not Exist."
+        exit
+    }
     Remove-Item -Path "C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys" -Force -Recurse -ErrorAction Stop -Confirm:$false
     # Verify file no longer exists and is removed
     if (-not (Test-Path "C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys")) {
